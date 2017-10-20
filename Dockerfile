@@ -1,9 +1,9 @@
 FROM multiarch/debian-debootstrap:armhf-jessie
 
-RUN apt-get update && apt-get install -y wget curl
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y wget curl
 
 RUN apt-get update && \
-    apt-get install -y libusb-1.0-0-dev pkg-config ca-certificates git-core cmake build-essential --no-install-recommends && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y libusb-1.0-0-dev pkg-config ca-certificates git-core cmake build-essential --no-install-recommends && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -30,7 +30,7 @@ RUN git clone https://github.com/merbanan/rtl_433.git && \
     rm -rf /tmp/rtl_433
 
 RUN apt-get update && \
-    apt-get install -y mosquitto-clients && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y mosquitto-clients && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /
